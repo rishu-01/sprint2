@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Added Products</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container my-3 mx-auto">
+        <a href="../task6/itemform.html" class="btn btn-outline-dark"> Go to Home</a>
+    </div>
+    <div class="container">
+        <h1>Added Products</h1>
+        <div class="row" id="productList">
+            <!-- The added products will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Retrieve products from local storage and display them
+        document.addEventListener('DOMContentLoaded', function () {
+            const productListElement = document.getElementById('productList');
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+
+            if (products.length === 0) {
+                productListElement.innerHTML = '<p>No products added yet.</p>';
+            } else {
+                let productsHTML = '';
+                for (const product of products) {
+                    productsHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <img src="${product.image}" alt="${product.name}" class="card-img-top" style="max-width: 200px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text"><strong>Price:</strong> $${product.price}</p>
+                                    <p class="card-text"><strong>Category:</strong> ${product.category}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                productListElement.innerHTML = productsHTML;
+            }
+        });
+    </script>
+
+    <!-- Add Bootstrap JS and jQuery script links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
